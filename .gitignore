@@ -21,3 +21,6 @@ BuildLocal.rogue
 *.swo
 *.swp
 *~
+
+# Libraries
+src/lib/svelte-emscripten
