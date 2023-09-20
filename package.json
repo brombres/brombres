@@ -31,9 +31,5 @@
     "typescript": "^5.0.0",
     "vite": "^4.4.2"
   },
-  "type": "module",
-  "dependencies": {
-    "@devappd/svelte-resize-observer": "github:devappd/svelte-resize-observer",
-    "svelte-resize-observer": "github:devappd/svelte-resize-observer"
-  }
+  "type": "module"
 }
