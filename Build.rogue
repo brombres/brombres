@@ -9,38 +9,42 @@ uses Utility/VersionNumber
 routine rogo_default
   #rogo_help
   rogo_deps
+  rogo_build
   rogo_run
 endRoutine
 
 routine rogo_build
   rogo_deps
 
+  #execute @|roguec Test.rogue --target=C,Web
+
+            #{
   local cmd = "emcc -Wall -fno-strict-aliasing"
   cmd .= appending("-O0")
   #cmd .= appending("-s ALLOW_MEMORY_GROWTH=1 -s USE_SDL=2 -s USE_LIBPNG=1 -s FETCH")
   ##cmd .= appending("--preload-file=Assets/Internal@Internal")
-  cmd .= appending("--emrun")
-  cmd .= appending("-sMODULARIZE")
-  cmd .= appending("-sEXPORT_ES6")
+  #cmd .= appending("--emrun")
+  cmd .= appending("-s MODULARIZE=1")
+  cmd .= appending("-s EXPORT_ES6=1")
   cmd .= appending("-s ENVIRONMENT='web'")
-  cmd .= appending(''-s EXPORTED_RUNTIME_METHODS="['specialHTMLTargets', 'JSEvents', 'GL', 'callMain', 'abort']"'')
-  cmd .= appending("Test.c -o src/routes/Warlock/Test.js")
+  cmd .= appending("Test.c -o src/routes/warlock/Test.js")
   execute cmd
+  }#
 endRoutine
 
 routine rogo_run
-  rogo_build
   execute @|npm run dev -- --open
+  #execute @|npm run dev
 endRoutine
 
 routine rogo_deps
-  if (not File("src/lib/svelte-emscripten").exists)
-    execute @|git clone https://github.com/devappd/svelte-emscripten.git src/lib/svelte-emscripten
-  endIf
+  #if (not File("src/lib/svelte-emscripten").exists)
+  #  execute @|git clone https://github.com/devappd/svelte-emscripten.git src/lib/svelte-emscripten
+  #endIf
 
-  if (not File("src/lib/svelte-emscripten/src/emscripten-component-base").listing.count > 0)
-    execute @|cd src/lib/svelte-emscripten/src/emscripten-component-base && git submodule update --init
-  endIf
+  #if (not File("src/lib/svelte-emscripten/src/emscripten-component-base").listing.count > 0)
+  #  execute @|cd src/lib/svelte-emscripten/src/emscripten-component-base && git submodule update --init
+  #endIf
 
   #src/lib/svelte-emscripten/src/emscripten-component-base
 endRoutine
