@@ -75,7 +75,7 @@
 	<meta name="description" content="Warlock Web App" />
 </svelte:head>
 
-<h1>Simple Example of Emscripten+WASM in SvelteKit</h1>
+<h1>Emscripten+WASM in SvelteKit</h1>
 <ul>
   <li>Message: {message}
   <li>3 + 4 = {sum}
@@ -96,7 +96,7 @@
   {
     aspect-ratio:3200/2000;
     border: 0px none;
-    background-color: black;
+    background-color: #cccccc;
     position: static;
     top: 0px;
     left: 0px;
